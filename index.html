@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mels Parti Organizasyon | Lüks Etkinlik Tasarımı</title>
+<meta name="description" content="Antalya'nın en prestijli etkinlik planlama firması. Düğün, nişan ve özel davetleriniz için özel teklif alın.">
+
+<!-- Lüks Fontlar -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root {
+    --gold: #d4af37;
+    --gold-light: rgba(212, 175, 55, 0.15);
+    --dark: #0a0a0c;
+    --dark-muted: #121214;
+    --light: #ffffff;
+    --text-main: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.65);
+    --wa-color: #25D366;
+    --glass-bg: rgba(10, 10, 12, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-main);
+    background-color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .serif {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+  }
+
+  a { text-decoration: none; color: inherit; transition: var(--transition); }
+  img { max-width: 100%; height: auto; display: block; }
+  .container { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+  .section-pad { padding: 140px 0; }
+
+  /* --- NAVBAR --- */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 25px 0; transition: var(--transition);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .navbar.scrolled {
+    background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+  
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #fff; font-weight: 600; line-height: 1; letter-spacing: 1.5px; display: flex; flex-direction: column; }
+  .logo span { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; margin-top: 5px; font-weight: 500;}
+  
+  .nav-links { display: flex; gap: 40px; align-items: center; }
+  .nav-links a { color: #fff; font-size: 0.8rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { border: 1px solid var(--gold); padding: 12px 28px; border-radius: 999px; }
+  .nav-cta:hover { background: var(--gold); color: #000 !important; }
+
+  /* --- HERO: INTERACTIVE APP SECTION --- */
+  .hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* height: 100vh yerine min-height, içerik uzarsa esner */
+    display: flex; 
+    align-items: flex-start; /* Merkeze zorlama, üstten başlasın */
+    background: #000;
+  }
+  
+  .bg-container { position: absolute; inset: 0; z-index: 1; overflow: hidden;}
+  .bg-image {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transform: scale(1.05); transition: opacity 1.2s ease, transform 4s ease-out;
+  }
+  .bg-image.active { opacity: 0.7; transform: scale(1); z-index: 2; }
+  
+  /* DAHA KESKİN VE OKUNAKLI GRADIENT OVERLAY */
+  .bg-overlay {
+    position: absolute; inset: 0; z-index: 3;
+    background: linear-gradient(90deg, rgba(10,10,12,1) 0%, rgba(10,10,12,0.85) 45%, rgba(10,10,12,0.1) 100%);
+  }
+
+  .hero-content-wrapper {
+    position: relative; z-index: 10;
+    display: flex; width: 100%;
+    align-items: center; justify-content: space-between;
+    padding-top: 140px; /* Logodan sonra kesin mesafe */
+    padding-bottom: 50px;
+  }
+
+  .hero-text { flex: 1; padding-right: 60px; color: #fff; }
+  .hero-text h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+  .hero-text h1 span { color: var(--gold); font-style: italic; }
+  .hero-text p { font-size: 1.15rem; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.8); max-width: 500px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+  /* Glassmorphism Form */
+  .form-side { width: 550px; flex-shrink: 0; display: flex; align-items: center; }
+  
+  .glass-card {
+    background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border); border-radius: 20px;
+    padding: 45px 40px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    position: relative; overflow: hidden; color: #fff;
+  }
+
+  .form-header { text-align: center; margin-bottom: 30px; }
+  .form-header h2 { font-size: 2.2rem; color: var(--gold); margin-bottom: 8px; }
+  .form-header p { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; }
+
+  .step-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; }
+  .dot { width: 35px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; transition: var(--transition); }
+  .dot.active { background: var(--gold); }
+  .dot.completed { background: #fff; }
+
+  .steps-container { position: relative; min-height: 380px; }
+  .form-step {
+    position: absolute; top: 0; left: 0; width: 100%;
+    opacity: 0; visibility: hidden; transform: translateX(30px); transition: var(--transition);
+  }
+  .form-step.active { opacity: 1; visibility: visible; transform: translateX(0); position: relative; }
+  .form-step.exit-left { opacity: 0; visibility: hidden; transform: translateX(-30px); position: absolute; }
+  .form-step.exit-right { opacity: 0; visibility: hidden; transform: translateX(30px); position: absolute; }
+
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;}
+  .opt-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 25px 15px; text-align: center;
+    cursor: pointer; transition: var(--transition);
+  }
+  .opt-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(212,175,55,0.5); }
+  .opt-card.selected { background: var(--gold-light); border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+  .opt-icon { font-size: 1.8rem; color: #fff; margin-bottom: 12px; transition: var(--transition); }
+  .opt-card.selected .opt-icon { color: var(--gold); }
+  .opt-title { font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;}
+
+  .input-wrap { margin-bottom: 25px; text-align: left; }
+  .input-wrap label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase;}
+  .glass-input {
+    width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
+    color: #fff; font-family: inherit; font-size: 0.95rem; padding: 18px 20px;
+    border-radius: 8px; transition: var(--transition); outline: none;
+  }
+  .glass-input:focus { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+  select.glass-input option { background: #1a1a1a; color: #fff; }
+
+  .summary-box {
+    background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 25px; margin-bottom: 25px;
+  }
+  .summary-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
+  .summary-row:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+  .s-label { color: var(--text-muted); letter-spacing: 1px;}
+  .s-val { font-weight: 500; color: var(--gold); }
+
+  .actions { display: flex; justify-content: space-between; align-items: center; margin-top: 35px; }
+  .btn-prev { background: none; border: none; color: var(--text-muted); font-family: inherit; cursor: pointer; font-size: 0.85rem; transition: var(--transition); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;}
+  .btn-prev:hover { color: #fff; transform: translateX(-5px); }
+  
+  .btn-next { background: #fff; color: #000; border: none; padding: 16px 32px; border-radius: 999px; font-weight: 600; cursor: pointer; transition: var(--transition); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;}
+  .btn-next:hover { background: var(--gold); color: #fff; box-shadow: 0 5px 20px rgba(212,175,55,0.4); transform: translateY(-2px); }
+  
+  .btn-wa { background: var(--wa-color); color: #fff; border: none; width: 100%; padding: 18px; border-radius: 999px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px;}
+  .btn-wa:hover { background: #20bd5a; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3); }
+
+  /* --- FELSEFEMİZ (MELS DOKUNUŞU) --- */
+  .philosophy-section { padding: 120px 0; background: var(--dark-muted); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .phil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .phil-title { font-size: 3.5rem; color: #fff; line-height: 1.1; margin-bottom: 30px; }
+  .phil-title span { color: var(--gold); font-style: italic; display: block; margin-top: 10px;}
+  .phil-text { font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; font-weight: 300; }
+  .phil-text p { margin-bottom: 20px; }
+  .phil-text strong { color: #fff; font-weight: 500; }
+  .phil-divider { width: 40px; height: 1px; background: var(--gold); margin: 30px 0; }
+
+  /* --- SERVICES SECTION (EDITORIAL MAGAZINE STYLE) --- */
+  .section-header { text-align: center; margin-bottom: 80px; }
+  .section-header h2 { font-size: 3.5rem; color: #fff; margin-bottom: 20px; }
+  .section-header .divider { width: 1px; height: 60px; background: var(--gold); margin: 0 auto 25px; }
+  .section-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto; font-weight: 300;}
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .service-card {
+    position: relative; aspect-ratio: 3/4.5; border-radius: 12px; overflow: hidden;
+    cursor: pointer;
+  }
+  .service-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+  .service-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+    padding: 40px 30px; display: flex; flex-direction: column; justify-content: flex-end;
+    transition: var(--transition); border: 1px solid transparent; border-radius: 12px;
+  }
+  .service-card:hover img { transform: scale(1.08); }
+  .service-card:hover .service-overlay { border-color: rgba(212,175,55,0.4); background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%);}
+  
+  .service-overlay h3 { font-size: 2.2rem; color: #fff; margin-bottom: 15px; transform: translateY(10px); transition: var(--transition); }
+  .service-overlay p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; opacity: 0; transform: translateY(20px); transition: var(--transition); font-weight: 300;}
+  
+  .service-card:hover .service-overlay h3 { transform: translateY(0); color: var(--gold); }
+  .service-card:hover .service-overlay p { opacity: 1; transform: translateY(0); }
+
+  /* --- GALLERY SECTION (SEAMLESS GRID) --- */
+  .gallery-section { padding: 0; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .gal-item { aspect-ratio: 1; position: relative; overflow: hidden; }
+  .gal-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease, filter 0.8s ease; filter: grayscale(15%); }
+  .gal-overlay {
+    position: absolute; inset: 0; background: rgba(212,175,55,0.15);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: var(--transition);
+  }
+  .gal-overlay i { font-size: 2.5rem; color: #fff; transform: scale(0.5); transition: var(--transition); }
+  .gal-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
+  .gal-item:hover .gal-overlay { opacity: 1; box-shadow: inset 0 0 0 4px var(--gold); }
+  .gal-item:hover .gal-overlay i { transform: scale(1); }
+
+  /* --- FOOTER (TRANSPARENT BACKGROUNDLU) --- */
+  .footer { 
+    position: relative;
+    color: #fff; padding: 120px 0 30px; 
+    border-top: 1px solid rgba(255,255,255,0.05); 
+    background: #000;
+  }
+  
+  .footer-bg-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.15;
+    z-index: 1;
+  }
+  
+  .footer .container { position: relative; z-index: 2; }
+  
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 80px; margin-bottom: 80px; }
+  
+  .footer-about p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 0.95rem; margin: 25px 0 35px; max-width: 450px; font-weight: 300;}
+  .social-icons { display: flex; gap: 20px; }
+  .social-icons a {
+    width: 50px; height: 50px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px);
+    display: flex; align-items: center; justify-content: center; color: #fff; transition: var(--transition); font-size: 1.2rem;
+  }
+  .social-icons a:hover { background: var(--gold); border-color: var(--gold); transform: translateY(-5px); }
+  
+  .f-title { font-size: 1.2rem; color: #fff; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 500;}
+  .f-links { list-style: none; }
+  .f-links li { margin-bottom: 20px; }
+  .f-links a, .f-links span { color: rgba(255,255,255,0.7); transition: var(--transition); font-size: 0.95rem; font-weight: 300;}
+  .f-links a:hover { color: var(--gold); padding-left: 8px; }
+
+  .footer-bottom { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase;}
+  .footer-bottom b { color: var(--gold); font-weight: 500; }
+
+  /* --- RESPONSIVE (MÜKEMMEL HİZALAMA) --- */
+  @media (max-width: 1200px) {
+    /* TABLET VE KÜÇÜK EKRANLAR İÇİN KESİN ÇÖZÜM */
+    .hero-content-wrapper { 
+      flex-direction: column; 
+      justify-content: flex-start; /* Merkeze zorlama! Yukarıdan başlasın */
+      padding-top: 150px; /* Logodan her zaman 150px uzak duracak */
+    }
+    .bg-overlay { background: linear-gradient(180deg, rgba(10,10,12,1) 0%, rgba(10,10,12,0.7) 100%); }
+    .hero-text { padding-right: 0; text-align: center; margin-bottom: 40px; flex: none; }
+    .hero-text p { margin: 0 auto; }
+    .phil-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .phil-divider { margin: 30px auto; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 50px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .navbar { padding: 15px 0; }
+    .logo { font-size: 1.6rem; }
+    .container { padding: 0 20px; }
+    .section-pad { padding: 80px 0; }
+    .philosophy-section { padding: 80px 0; }
+    
+    .hero-content-wrapper { padding-top: 120px; }
+    .hero-text { margin-bottom: 30px; }
+    .hero-text h1 { font-size: 2.5rem; margin-bottom: 15px; }
+    .hero-text p { display: none; }
+    
+    .form-side { width: 100%; }
+    .glass-card { padding: 35px 20px; border-radius: 16px; }
+    .form-header h2 { font-size: 1.8rem; margin-bottom: 5px; }
+    
+    .options-grid { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .opt-card { padding: 15px 10px; }
+    .opt-icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .opt-title { font-size: 0.7rem; }
+    
+    .phil-title { font-size: 2.2rem; }
+    .section-header h2 { font-size: 2.2rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      Mels Parti
+      <span>Organizasyon</span>
+    </a>
+    <div class="nav-links">
+      <a href="#felsefemiz">Mels Farkı</a>
+      <a href="#hizmetler">Koleksiyon</a>
+      <a href="#galeri">Portfolyo</a>
+      <a href="#iletisim">İletişim</a>
+      <a href="https://wa.me/905417491162" class="nav-cta">Bize Ulaşın</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO: INTERACTIVE APP -->
+<section class="hero-section">
+  <div class="bg-container">
+    <!-- GERÇEK UNSPLASH FOTOĞRAFLARI (Yapay Zeka Değil) -->
+    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2070&q=80" id="bg-wedding" class="bg-image active" alt="Düğün">
+    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=2070&q=80" id="bg-birthday" class="bg-image" alt="Özel Davet">
+    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=2070&q=80" id="bg-corporate" class="bg-image" alt="Kurumsal">
+    <div class="bg-overlay"></div>
+  </div>
+
+  <div class="container hero-content-wrapper">
+    
+    <div class="hero-text">
+      <h1 id="dynamicTitle" class="serif">Kusursuz Bir<br><span>Başlangıç</span></h1>
+      <p id="dynamicDesc">Antalya'nın büyüleyici atmosferinde, en ince ayrıntısına kadar tasarlanmış, size özel bir organizasyon deneyimi için ilk adımı atın.</p>
+    </div>
+
+    <div class="form-side">
+      <div class="glass-card">
+        <div class="form-header">
+          <h2 class="serif">Teklif Sihirbazı</h2>
+          <p>3 adımda hayalinizdeki daveti şekillendirin.</p>
+        </div>
+
+        <div class="step-dots">
+          <div class="dot active" id="dot-1"></div>
+          <div class="dot" id="dot-2"></div>
+          <div class="dot" id="dot-3"></div>
+        </div>
+
+        <div class="steps-container">
+          
+          <div class="form-step active" id="step-1">
+            <div class="input-wrap" style="text-align: center;">
+              <label>Konseptinizi Seçin</label>
+              <div class="options-grid">
+                <div class="opt-card" data-type="Düğün & Nişan" data-bg="bg-wedding">
+                  <i class="fa-solid fa-ring opt-icon"></i>
+                  <div class="opt-title">DÜĞÜN & NİŞAN</div>
+                </div>
+                <div class="opt-card" data-type="Doğum Günü" data-bg="bg-birthday">
+                  <i class="fa-solid fa-cake-candles opt-icon"></i>
+                  <div class="opt-title">DOĞUM GÜNÜ</div>
+                </div>
+                <div class="opt-card" data-type="Baby Shower" data-bg="bg-birthday">
+                  <i class="fa-solid fa-baby-carriage opt-icon"></i>
+                  <div class="opt-title">BABY SHOWER</div>
+                </div>
+                <div class="opt-card" data-type="Kurumsal Etkinlik" data-bg="bg-corporate">
+                  <i class="fa-solid fa-briefcase opt-icon"></i>
+                  <div class="opt-title">KURUMSAL</div>
+                </div>
+              </div>
+            </div>
+            <div class="actions" style="justify-content: flex-end;">
+              <button class="btn-next" onclick="goToStep(2)">Devam <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="form-step" id="step-2">
+            <div class="input-wrap">
+              <label>Tahmini Davetli Sayısı</label>
+              <select id="inpCount" class="glass-input">
+                <option value="" disabled selected>Seçiniz</option>
+                <option value="1-50 (Butik)">1 - 50 Kişi (Butik)</option>
+                <option value="50-150 Kişi">50 - 150 Kişi</option>
+                <option value="150-300 Kişi">150 - 300 Kişi</option>
+                <option value="300+ Kişi">300+ Kişi</option>
+              </select>
+            </div>
+            <div class="input-wrap">
+              <label>Planlanan Tarih</label>
+              <input type="date" id="inpDate" class="glass-input">
+            </div>
+            <div class="input-wrap">
+              <label>Aklınızdaki Özel Detaylar (Opsiyonel)</label>
+              <input type="text" id="inpNote" class="glass-input" placeholder="Örn: Açık hava, bohem konsept...">
+            </div>
+            <div class="actions">
+              <button class="btn-prev" onclick="goToStep(1)"><i class="fa-solid fa-arrow-left"></i> Geri</button>
+              <button class="btn-next" onclick="goToStep(3)">Son Adım <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="form-step" id="step-3">
+            <div class="summary-box">
+              <div class="summary-row"><span class="s-label">Konsept:</span> <span class="s-val" id="sumType">-</span></div>
+              <div class="summary-row"><span class="s-label">Davetli:</span> <span class="s-val" id="sumCount">-</span></div>
+              <div class="summary-row"><span class="s-label">Tarih:</span> <span class="s-val" id="sumDate">-</span></div>
+            </div>
+            <div class="input-wrap">
+              <label>Size Nasıl Hitap Edelim?</label>
+              <input type="text" id="inpName" class="glass-input" placeholder="Adınız Soyadınız">
+            </div>
+            <div class="actions" style="flex-direction: column; gap: 15px;">
+              <button class="btn-wa" onclick="sendWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="font-size:1.4rem;"></i> Fiyat Teklifi Al
+              </button>
+              <button class="btn-prev" onclick="goToStep(2)"><i class="fa-solid fa-pen"></i> Bilgileri Düzenle</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FELSEFEMİZ (MELS FARKI) -->
+<section id="felsefemiz" class="philosophy-section">
+  <div class="container">
+    <div class="phil-grid">
+      <div>
+        <h2 class="phil-title serif">Sıradan Bir Davet Değil,<br><span>Size Özel Bir Hikaye.</span></h2>
+      </div>
+      <div>
+        <div class="phil-text">
+          <p>Mels Parti olarak inancımız; her etkinliğin kendine has bir ruhu olduğu yönündedir. Bugüne kadar Antalya'nın en prestijli mekanlarında imza attığımız <strong>yüzlerce özel organizasyonda</strong>, standart paketleri değil, kişiye özel tasarımı benimsedik.</p>
+          <div class="phil-divider"></div>
+          <p>Bizim için <strong>%100 kusursuzluk</strong> sadece bir hedef değil, her davette yeniden kanıtladığımız bir standarttır. Sizin hayaliniz, bizim estetik vizyonumuzla birleştiğinde ortaya sadece bir kutlama değil, unutulmaz bir deneyim çıkar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="hizmetler" class="section-pad">
+  <div class="container">
+    <div class="section-header">
+      <div class="divider"></div>
+      <h2 class="serif">Koleksiyonumuz</h2>
+      <p>Hayatınızın en özel anlarını unutulmaz kılmak için tasarlanmış imza konseptlerimiz.</p>
+    </div>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <!-- ÖZEL ÜRETİM GÖRSEL -->
+        <img src="wedding.jpg" alt="Düğün & Nişan">
+        <div class="service-overlay">
+          <h3 class="serif">Düğün & Nişan</h3>
+          <p>Hayalinizdeki geceyi Akdeniz'in eşsiz güzelliğinde gerçeğe dönüştürüyoruz. Özel tasarım konseptler ve romantik detaylar.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <!-- ÖZEL ÜRETİM GÖRSEL -->
+        <img src="party.jpg" alt="Özel Kutlamalar">
+        <div class="service-overlay">
+          <h3 class="serif">Özel Kutlamalar</h3>
+          <p>Her yaşa özel tematik doğum günleri, baby shower davetleri ve sınırları zorlayan elit ev partileri.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <!-- ÖZEL ÜRETİM GÖRSEL -->
+        <img src="corporate.jpg" alt="Kurumsal Davetler">
+        <div class="service-overlay">
+          <h3 class="serif">Kurumsal</h3>
+          <p>Markanızın prestijini zirveye taşıyan yüksek kaliteli lansmanlar, protokol yönetimi ve motivasyon yemekleri.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="galeri" class="gallery-section">
+  <div class="gallery-grid">
+    <div class="gal-item"><img src="gal1.jpg" alt="Galeri"><div class="gal-overlay"><i class="fab fa-instagram"></i></div></div>
+    <div class="gal-item"><img src="gal2.jpg" alt="Galeri"><div class="gal-overlay"><i class="fab fa-instagram"></i></div></div>
+    <div class="gal-item"><img src="gal3.jpg" alt="Galeri"><div class="gal-overlay"><i class="fab fa-instagram"></i></div></div>
+    <div class="gal-item"><img src="gal4.jpg" alt="Galeri"><div class="gal-overlay"><i class="fab fa-instagram"></i></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="iletisim">
+  <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=2070&q=80" class="footer-bg-img" alt="Footer Background">
+  
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#" class="logo" style="margin-bottom:10px;">Mels Parti<span>Organizasyon</span></a>
+        <p>Antalya Events olarak, Akdeniz'in en güzel şehrinde unutulmaz anılar yaratıyoruz. Detaylara verdiğimiz önem ve lüks yaklaşımımız ile hayalinizi gerçeğe dönüştürüyoruz.</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/mels_eventtt/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:melbaycan@gmail.com"><i class="fas fa-envelope"></i></a>
+          <a href="https://wa.me/905417491162"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="f-title">İletişim</h3>
+        <ul class="f-links">
+          <li><span>Sarısu, 168. Sk. No:9<br>07130 Konyaaltı/Antalya</span></li>
+          <li style="margin-top:15px;"><a href="tel:05071437410" style="color:var(--gold);">+90 507 143 74 10</a></li>
+          <li><a href="mailto:melbaycan@gmail.com">melbaycan@gmail.com</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="f-title">Ödül & Profil</h3>
+        <ul class="f-links">
+          <li><a href="https://dugun.com/dugun-organizasyon/antalya/mels-parti-organizasyon-61dec9" target="_blank">Düğün.com Onaylı Firma</a></li>
+          <li><a href="https://www.gigbi.com/p/mels-parti-organizasyon" target="_blank">Gigbi Yüksek Puanlı Profil</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Mels Parti Organizasyon. Tüm hakları saklıdır. &nbsp;|&nbsp; TASARIM & YAZILIM: <b>ANIL METE</b>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if(window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  let currentStep = 1;
+  let selectedType = "";
+  
+  const contentData = {
+    "Düğün & Nişan": { title: "Masalsı Bir<br><span>Aşk</span>", desc: "Romantizmin zirvesinde, kusursuz detaylarla bezenmiş hayatınızın en özel gecesi." },
+    "Doğum Günü": { title: "Eğlencenin<br><span>Zirvesi</span>", desc: "Sevdiklerinizle bir arada, size özel konseptlerle unutulmaz bir kutlama." },
+    "Baby Shower": { title: "Tatlı Bir<br><span>Bekleyiş</span>", desc: "Zarafetin ve neşenin buluştuğu, ailenizin yeni üyesine en güzel 'merhaba'." },
+    "Kurumsal Etkinlik": { title: "Profesyonel<br><span>Prestij</span>", desc: "Kurumsal imajınızı yansıtan, eksiksiz koordine edilmiş lüks davetler." }
+  };
+
+  const cards = document.querySelectorAll('.opt-card');
+  cards.forEach(card => {
+    card.addEventListener('click', function() {
+      cards.forEach(c => c.classList.remove('selected'));
+      this.classList.add('selected');
+      
+      selectedType = this.getAttribute('data-type');
+      const bgId = this.getAttribute('data-bg');
+      
+      document.querySelectorAll('.bg-image').forEach(img => img.classList.remove('active'));
+      document.getElementById(bgId).classList.add('active');
+      
+      if(contentData[selectedType]) {
+        document.getElementById('dynamicTitle').innerHTML = contentData[selectedType].title;
+        document.getElementById('dynamicDesc').innerHTML = contentData[selectedType].desc;
+      }
+      document.getElementById('sumType').innerText = selectedType;
+    });
+  });
+
+  function goToStep(targetStep) {
+    if(targetStep === 2 && !selectedType) { alert("Lütfen bir konsept seçiniz."); return; }
+    if(targetStep === 3) {
+      const count = document.getElementById('inpCount').value;
+      if(!count) { alert("Lütfen davetli sayısını seçiniz."); return; }
+      document.getElementById('sumCount').innerText = count;
+      document.getElementById('sumDate').innerText = document.getElementById('inpDate').value ? document.getElementById('inpDate').value.split('-').reverse().join('.') : 'Belirtilmedi';
+    }
+
+    const currentEl = document.getElementById(`step-${currentStep}`);
+    const targetEl = document.getElementById(`step-${targetStep}`);
+
+    if(targetStep > currentStep) {
+      currentEl.classList.remove('active'); currentEl.classList.add('exit-left');
+      targetEl.classList.remove('exit-right', 'exit-left'); targetEl.classList.add('active');
+    } else {
+      currentEl.classList.remove('active'); currentEl.classList.add('exit-right');
+      targetEl.classList.remove('exit-right', 'exit-left'); targetEl.classList.add('active');
+    }
+
+    document.querySelectorAll('.dot').forEach((dot, idx) => {
+      dot.classList.remove('active', 'completed');
+      if(idx + 1 < targetStep) dot.classList.add('completed');
+      if(idx + 1 === targetStep) dot.classList.add('active');
+    });
+    currentStep = targetStep;
+  }
+
+  function sendWhatsApp() {
+    const name = document.getElementById('inpName').value.trim();
+    if(!name) { alert("Lütfen adınızı giriniz."); return; }
+    const count = document.getElementById('inpCount').value;
+    const date = document.getElementById('inpDate').value ? document.getElementById('inpDate').value.split('-').reverse().join('.') : 'Netleşmedi';
+    const note = document.getElementById('inpNote').value;
+
+    let text = `✨ *Merhaba Mels Parti Ekibi*\n\nTeklif Sihirbazı üzerinden size ulaşıyorum. Aşağıdaki detaylar için fiyat bilgisi alabilir miyim?\n\n`;
+    text += `👤 *Ad Soyad:* ${name}\n`;
+    text += `🎯 *Konsept:* ${selectedType}\n`;
+    text += `👥 *Davetli:* ${count}\n`;
+    text += `📅 *Tarih:* ${date}\n`;
+    if(note) text += `💭 *Özel Not:* ${note}\n`;
+
+    const encoded = encodeURIComponent(text);
+    window.open("https://wa.me/905071437410?text=" + encoded, "_blank");
+  }
+</script>
+
+</body>
+</html>
